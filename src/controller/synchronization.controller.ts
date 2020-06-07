@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Post, Query } from '@nestjs/common';
-import { SynchronizationService } from './synchronization.service';
-import { ParseTimestampPipe } from './parse-timestamp.pipe';
-import { SynchronizationDto } from './dto/synchronization.dto';
+import { SynchronizationService } from '../service/synchronization.service';
+import { ParseTimestampPipe } from '../pipe/parse-timestamp.pipe';
+import { SynchronizationDto } from '..//dto/synchronization.dto';
 
 @Controller('synchronization')
 export class SynchronizationController {
@@ -22,9 +22,7 @@ export class SynchronizationController {
   }
 
   @Post('/push')
-  async push(
-    @Body() synchronizationDto: SynchronizationDto,
-  ): Promise<void> {
+  async push(@Body() synchronizationDto: SynchronizationDto): Promise<void> {
     const date = new Date(synchronizationDto.lastPulledAt);
     date.setMilliseconds(0);
     synchronizationDto.lastPulledAt = date.getTime();

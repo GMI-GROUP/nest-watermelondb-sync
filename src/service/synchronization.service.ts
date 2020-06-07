@@ -1,14 +1,13 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { Connection, EntityManager } from 'typeorm';
 import { InjectEntityManager } from '@nestjs/typeorm';
-import { SynchronizationDto } from './dto/synchronization.dto';
-import { SynchronizationReadHandlerInterface } from './handler/synchronization-read-handler.interface';
-import { SynchronizationReadHandler } from './handler/synchronization-read.handler';
-import { SynchronizationWriteHandlerInterface } from './handler/synchronization-write-handler.interface';
-import { AbstractSynchronizable } from './abstract/AbstractSynchronizable';
-import { SynchronizationWriteHandler } from './handler/synchronization-write.handler';
-import { MODULE_OPTIONS } from './module-opttion.const';
-import { ModuleOptionsInterface } from './interfaces/module-options.interface';
+import { SynchronizationDto } from '../dto/synchronization.dto';
+import { SynchronizationReadHandlerInterface } from '../handler/synchronization-read-handler.interface';
+import { SynchronizationReadHandler } from '../handler/synchronization-read.handler';
+import { SynchronizationWriteHandlerInterface } from '../handler/synchronization-write-handler.interface';
+import { SynchronizationWriteHandler } from '../handler/synchronization-write.handler';
+import { ModuleOptionsInterface } from '../interfaces/module-options.interface';
+import { WATERMELLONDB_SYNCHRONIZATION_MODULE_OPTIONS } from '../../src/watermellondb-synchronization.constants';
 
 function toPluralisedUnderScore(name: string): string {
   return (
@@ -33,7 +32,7 @@ export class SynchronizationService {
   constructor(
     private readonly connection: Connection,
     @InjectEntityManager() private readonly entityManager: EntityManager,
-    @Inject(MODULE_OPTIONS) options: ModuleOptionsInterface,
+    @Inject(WATERMELLONDB_SYNCHRONIZATION_MODULE_OPTIONS) options: ModuleOptionsInterface,
   ) {
     this.readEntities = new Map();
     for (const entity of options.readEntities) {
@@ -42,7 +41,7 @@ export class SynchronizationService {
         new SynchronizationReadHandler(
           this.entityManager.getRepository(entity),
         ),
-      )
+      );
     }
 
     this.writableEntities = new Map();
@@ -51,8 +50,7 @@ export class SynchronizationService {
     }
   }
 
-  public async initSynchronization(
-  ): Promise<SynchronizationDto> {
+  public async initSynchronization(): Promise<SynchronizationDto> {
     const synchronizationDto = new SynchronizationDto();
     synchronizationDto.lastPulledAt = new Date().getTime();
 
@@ -80,10 +78,8 @@ export class SynchronizationService {
     return synchronizationDto;
   }
 
-  public async saveChanges(
-    synchronizationDto: SynchronizationDto,
-  ) {
-    const saveChangesTransaction = async transactionalEntityManager => {
+  public async saveChanges(synchronizationDto: SynchronizationDto) {
+    const saveChangesTransaction = async (transactionalEntityManager) => {
       for (const [key, value] of Object.entries(synchronizationDto.changes)) {
         // this will handle:
         //   a) empty changes in writableEntity (optimization)

@@ -1,6 +1,6 @@
-import { AbstractSynchronizable } from '../abstract/AbstractSynchronizable';
+import { AbstractSynchrizableEntity } from '../abstract/synchronizable-entity.abstract';
 
 export interface ModuleOptionsInterface {
-  readEntities: any[],
-  writeEntities: any[],
+  readEntities: any[];
+  writeEntities: any[];
 }

@@ -1,8 +1,8 @@
 import { Repository } from 'typeorm';
 import { SynchronizationWriteHandlerInterface } from './synchronization-write-handler.interface';
-import { AbstractSynchronizable } from '../abstract/AbstractSynchronizable';
+import { AbstractSynchrizableEntity } from '../abstract/synchronizable-entity.abstract';
 
-export class SynchronizationWriteHandler<T extends AbstractSynchronizable>
+export class SynchronizationWriteHandler<T extends AbstractSynchrizableEntity>
   implements SynchronizationWriteHandlerInterface<T> {
   async saveChanges(
     transactionalRepository: Repository<T>,

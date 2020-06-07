@@ -14,7 +14,7 @@ This repository shows the backend synchronization code for NestJS applications.
 
 Module import:
 `
-    SynchronizationModule.register({
+    WatermellondbSynchronizationModule.register({
       readEntities: [Power],
       writeEntities: [],
     })

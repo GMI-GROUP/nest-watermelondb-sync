@@ -1,8 +1,8 @@
 import { Repository } from 'typeorm';
-import { AbstractSynchronizable } from '../abstract/AbstractSynchronizable';
+import { AbstractSynchrizableEntity } from '../abstract/synchronizable-entity.abstract';
 
 export interface SynchronizationWriteHandlerInterface<
-  T extends AbstractSynchronizable
+  T extends AbstractSynchrizableEntity
 > {
   saveChanges(
     transactionalRepository: Repository<T>,

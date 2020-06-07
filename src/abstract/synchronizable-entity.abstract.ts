@@ -1,7 +1,7 @@
 import { BeforeInsert, BeforeUpdate, Column, PrimaryColumn } from 'typeorm';
 import { v4 as uuid4 } from 'uuid';
 
-export abstract class AbstractSynchronizable {
+export abstract class AbstractSynchrizableEntity {
   @PrimaryColumn()
   id: string;
 

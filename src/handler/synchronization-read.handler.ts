@@ -1,10 +1,10 @@
 import { Repository } from 'typeorm';
 import { SynchronizationReadHandlerInterface } from './synchronization-read-handler.interface';
 import { ChangesDto } from '../dto/changes.dto';
-import { LessThanDate, MoreThanDate } from '../date-operations.helper';
-import { AbstractSynchronizable } from '../abstract/AbstractSynchronizable';
+import { LessThanDate, MoreThanDate } from '../helper/date-operations.helper';
+import { AbstractSynchrizableEntity } from 'src/abstract/synchronizable-entity.abstract';
 
-export class SynchronizationReadHandler<T extends AbstractSynchronizable>
+export class SynchronizationReadHandler<T extends AbstractSynchrizableEntity>
   implements SynchronizationReadHandlerInterface<T> {
   constructor(protected repository: Repository<T>) {}
 
@@ -16,9 +16,7 @@ export class SynchronizationReadHandler<T extends AbstractSynchronizable>
     return changesDto;
   }
 
-  async findChangesAfterDate(
-    lastModifiedAt: Date,
-  ): Promise<ChangesDto<T>> {
+  async findChangesAfterDate(lastModifiedAt: Date): Promise<ChangesDto<T>> {
     const changesDto = new ChangesDto<T>();
 
     changesDto.created = await this.repository.find({
@@ -37,14 +35,16 @@ export class SynchronizationReadHandler<T extends AbstractSynchronizable>
       },
     });
 
-    changesDto.deleted = (await this.repository.find({
-      where: {
-        serverCreatedAt: LessThanDate(lastModifiedAt),
-        lastModifiedAt: MoreThanDate(lastModifiedAt),
-        deleted: true,
-      },
-      select: ['id'],
-    })).map(entity => entity.id);
+    changesDto.deleted = (
+      await this.repository.find({
+        where: {
+          serverCreatedAt: LessThanDate(lastModifiedAt),
+          lastModifiedAt: MoreThanDate(lastModifiedAt),
+          deleted: true,
+        },
+        select: ['id'],
+      })
+    ).map((entity) => entity.id);
 
     return changesDto;
   }
