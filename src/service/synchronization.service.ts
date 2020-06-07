@@ -32,7 +32,8 @@ export class SynchronizationService {
   constructor(
     private readonly connection: Connection,
     @InjectEntityManager() private readonly entityManager: EntityManager,
-    @Inject(WATERMELLONDB_SYNCHRONIZATION_MODULE_OPTIONS) options: ModuleOptionsInterface,
+    @Inject(WATERMELLONDB_SYNCHRONIZATION_MODULE_OPTIONS)
+    options: ModuleOptionsInterface,
   ) {
     this.readEntities = new Map();
     for (const entity of options.readEntities) {

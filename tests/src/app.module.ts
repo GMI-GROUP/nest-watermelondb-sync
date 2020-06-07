@@ -23,7 +23,7 @@ import { WatermellondbSynchronizationModule } from '../../src/watermellondb-sync
     WatermellondbSynchronizationModule.register({
       readEntities: [Post],
       writeEntities: [],
-    })
+    }),
   ],
 })
 export class ApplicationModule {}
