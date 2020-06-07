@@ -1,6 +1,6 @@
 import { Repository } from 'typeorm';
 import { SynchronizationWriteHandlerInterface } from './synchronization-write-handler.interface';
-import { AbstractSynchronizable } from '../../abstract/AbstractSynchronizable';
+import { AbstractSynchronizable } from '../abstract/AbstractSynchronizable';
 
 export class SynchronizationWriteHandler<T extends AbstractSynchronizable>
   implements SynchronizationWriteHandlerInterface<T> {

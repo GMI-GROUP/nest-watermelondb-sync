@@ -2,7 +2,7 @@ import { Repository } from 'typeorm';
 import { SynchronizationReadHandlerInterface } from './synchronization-read-handler.interface';
 import { ChangesDto } from '../dto/changes.dto';
 import { LessThanDate, MoreThanDate } from '../date-operations.helper';
-import { AbstractSynchronizable } from '../../abstract/AbstractSynchronizable';
+import { AbstractSynchronizable } from '../abstract/AbstractSynchronizable';
 
 export class SynchronizationReadHandler<T extends AbstractSynchronizable>
   implements SynchronizationReadHandlerInterface<T> {

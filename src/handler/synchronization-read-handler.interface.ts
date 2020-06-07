@@ -1,5 +1,5 @@
 import { ChangesDto } from '../dto/changes.dto';
-import { AbstractSynchronizable } from '../../abstract/AbstractSynchronizable';
+import { AbstractSynchronizable } from '../abstract/AbstractSynchronizable';
 
 export interface SynchronizationReadHandlerInterface<
   T extends AbstractSynchronizable

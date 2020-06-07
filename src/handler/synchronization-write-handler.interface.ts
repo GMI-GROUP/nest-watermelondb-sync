@@ -1,5 +1,5 @@
 import { Repository } from 'typeorm';
-import { AbstractSynchronizable } from '../../abstract/AbstractSynchronizable';
+import { AbstractSynchronizable } from '../abstract/AbstractSynchronizable';
 
 export interface SynchronizationWriteHandlerInterface<
   T extends AbstractSynchronizable

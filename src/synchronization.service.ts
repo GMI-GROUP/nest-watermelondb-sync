@@ -5,7 +5,7 @@ import { SynchronizationDto } from './dto/synchronization.dto';
 import { SynchronizationReadHandlerInterface } from './handler/synchronization-read-handler.interface';
 import { SynchronizationReadHandler } from './handler/synchronization-read.handler';
 import { SynchronizationWriteHandlerInterface } from './handler/synchronization-write-handler.interface';
-import { AbstractSynchronizable } from '../abstract/AbstractSynchronizable';
+import { AbstractSynchronizable } from './abstract/AbstractSynchronizable';
 import { SynchronizationWriteHandler } from './handler/synchronization-write.handler';
 import { MODULE_OPTIONS } from './module-opttion.const';
 import { ModuleOptionsInterface } from './interfaces/module-options.interface';
