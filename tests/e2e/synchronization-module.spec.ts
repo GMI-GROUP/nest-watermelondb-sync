@@ -4,7 +4,7 @@ import * as request from 'supertest';
 import { ApplicationModule } from '../src/app.module';
 import { Server } from 'http';
 
-describe('SyncModule', () => {
+describe('SynchronizationModule', () => {
   let server: Server;
   let app: INestApplication;
 
@@ -18,10 +18,21 @@ describe('SyncModule', () => {
     await app.init();
   });
 
-  it(`should return created entity`, () => {
+  it(`Should return object with WatermellonDB format`, () => {
     return request(server)
-      .post('/photo')
-      .expect(201, { name: 'Nest', description: 'Is great!', views: 6000 });
+      .get('/synchronization/init')
+      .expect(200)
+      .expect((response) => {
+        expect(response.body).toMatchObject({
+          changes: {
+            posts: {
+              created: [],
+              updated: [],
+              deleted: [],
+            },
+          },
+        });
+      });
   });
 
   afterEach(async () => {

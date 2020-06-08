@@ -8,10 +8,10 @@ export abstract class AbstractSynchrizableEntity {
   @Column()
   deleted: boolean;
 
-  @Column({ type: 'datetime' })
+  @Column()
   lastModifiedAt: Date;
 
-  @Column({ type: 'datetime' })
+  @Column()
   serverCreatedAt: Date;
 
   constructor() {
