@@ -36,7 +36,7 @@
     "reflect-metadata": "^0.1.12",
     "rxjs": "^6.0.0",
     "typeorm": "^0.2.7",
-    "moment": "^2.26.0"
+    "moment": "^2.29.4"
   },
   "devDependencies": {
     "@commitlint/cli": "8.3.5",
@@ -59,7 +59,7 @@
     "husky": "4.2.5",
     "jest": "26.0.1",
     "lint-staged": "10.2.9",
-    "moment": "^2.26.0",
+    "moment": "^2.29.4",
     "mysql": "2.18.1",
     "pg": "8.2.1",
     "prettier": "2.0.5",
